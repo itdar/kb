@@ -1,8 +1,9 @@
 package com.kb.controller;
 
-import com.kb.common.dto.SearchRequest;
-import com.kb.common.dto.SearchResponse;
+import com.kb.common.dto.search.SearchRequest;
+import com.kb.common.dto.search.SearchResponse;
 import com.kb.service.SearchService;
+import com.kb.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SearchRestController {
 
     private final SearchService searchService;
+    private final StorageService storageService;
 
     @GetMapping
     public ResponseEntity<SearchResponse> search(
@@ -24,6 +26,7 @@ public class SearchRestController {
         @RequestParam(defaultValue = "1") Integer page,
         @RequestParam(defaultValue = "10") Integer size)
     {
+        storageService.saveQuery(query);
         return ResponseEntity.ok().body(searchService.search(SearchRequest.of(query, sort, page, size)));
     }
 

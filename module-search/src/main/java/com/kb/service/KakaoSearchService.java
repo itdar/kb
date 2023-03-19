@@ -2,8 +2,8 @@ package com.kb.service;
 
 import static com.kb.common.exception.ExceptionStrings.KAKAO_API_EXCEPTION;
 
-import com.kb.common.dto.SearchRequest;
-import com.kb.common.dto.SearchResponse;
+import com.kb.common.dto.search.SearchRequest;
+import com.kb.common.dto.search.SearchResponse;
 import com.kb.common.exception.KakaoSearchApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RequiredArgsConstructor
 @Service
-public class KakaoSearchService implements SearchService{
+public class KakaoSearchService implements SearchService {
 
     @Value("${kakao.url}")
     private String kakaoUrl;

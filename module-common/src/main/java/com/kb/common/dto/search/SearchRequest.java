@@ -1,4 +1,4 @@
-package com.kb.common.dto;
+package com.kb.common.dto.search;
 
 import static com.kb.common.exception.ExceptionStrings.INVALID_PAGE;
 import static com.kb.common.exception.ExceptionStrings.INVALID_QUERY;

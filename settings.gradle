@@ -1,6 +1,5 @@
 rootProject.name = 'blog'
 
 include 'module-common'
-include 'module-popular'
 include 'module-search'
 

@@ -1,4 +1,4 @@
-package com.kb.common.dto;
+package com.kb.common.dto.search;
 
 import java.util.List;
 import lombok.Data;

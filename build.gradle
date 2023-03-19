@@ -51,9 +51,3 @@ project(':module-search') {
         implementation project(':module-common')
     }
 }
-
-project(':module-popular') {
-    dependencies {
-        implementation project(':module-common')
-    }
-}

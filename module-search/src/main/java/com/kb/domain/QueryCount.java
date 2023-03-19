@@ -1,4 +1,4 @@
-package com.kb.common.domain;
+package com.kb.domain;
 
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -18,7 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @Getter
 @EntityListeners(AuditingEntityListener.class)
-public class SearchCount {
+public class QueryCount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,13 +37,13 @@ public class SearchCount {
     @LastModifiedDate
     private LocalDateTime modifiedTime;
 
-    public SearchCount(String query, Integer count) {
+    public QueryCount(String query, Integer count) {
         this.query = query;
         this.count = count;
     }
 
-    public static SearchCount of(String query, int count) {
-        return new SearchCount(query, count);
+    public static QueryCount of(String query, int count) {
+        return new QueryCount(query, count);
     }
 
 }

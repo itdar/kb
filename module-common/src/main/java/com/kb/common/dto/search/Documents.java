@@ -1,4 +1,4 @@
-package com.kb.common.dto;
+package com.kb.common.dto.search;
 
 import java.time.LocalDateTime;
 import lombok.Data;

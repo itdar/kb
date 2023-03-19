@@ -1,4 +1,4 @@
-package com.kb.common.dto;
+package com.kb.common.dto.search;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
