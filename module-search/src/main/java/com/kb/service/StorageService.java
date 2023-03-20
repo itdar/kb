@@ -1,11 +1,12 @@
 package com.kb.service;
 
-import com.kb.common.dto.popular.PopularResponse;
+import com.kb.domain.QueryCount;
+import java.util.List;
 
 public interface StorageService {
 
     void saveQuery(String query);
 
-    PopularResponse getTop10();
+    List<QueryCount> getTop10();
 
 }

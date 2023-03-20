@@ -24,8 +24,7 @@ public class SearchRestController {
         @RequestParam String query,
         @RequestParam(defaultValue = "accuracy") String sort,
         @RequestParam(defaultValue = "1") Integer page,
-        @RequestParam(defaultValue = "10") Integer size)
-    {
+        @RequestParam(defaultValue = "10") Integer size) {
         storageService.saveQuery(query);
         return ResponseEntity.ok().body(searchService.search(SearchRequest.of(query, sort, page, size)));
     }
