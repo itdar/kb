@@ -7,6 +7,7 @@ import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
 import com.kb.common.enums.SearchType;
 import com.kb.common.exception.InvalidParameterException;
+import com.kb.service.searcher.Searcher;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

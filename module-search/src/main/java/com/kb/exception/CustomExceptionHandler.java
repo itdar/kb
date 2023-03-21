@@ -2,8 +2,6 @@ package com.kb.exception;
 
 import com.kb.common.exception.InvalidParameterException;
 import com.kb.common.exception.KakaoSearchApiException;
-import com.kb.service.Searcher;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

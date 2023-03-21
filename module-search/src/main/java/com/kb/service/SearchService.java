@@ -3,7 +3,10 @@ package com.kb.service;
 import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
 import com.kb.common.enums.SearchType;
+import com.kb.common.exception.AllSearchApiException;
+import com.kb.service.searcher.Searcher;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +15,7 @@ public class SearchService {
 
     private final SearchServiceFactory searchServiceFactory;
 
+    @Cacheable
     public SearchResponse search(SearchRequest searchRequest) {
         for (SearchType searchType : SearchType.values()) {
             Searcher searcher = searchServiceFactory.get(searchType);
@@ -23,6 +27,6 @@ public class SearchService {
             }
             return searchResponse;
         }
-        throw new RuntimeException("모든 검색기 실패");
+        throw new AllSearchApiException("모든 검색기 실패");
     }
 }

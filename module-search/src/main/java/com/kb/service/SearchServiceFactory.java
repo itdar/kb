@@ -1,12 +1,12 @@
 package com.kb.service;
 
 import com.kb.common.enums.SearchType;
+import com.kb.service.searcher.KakaoSearcher;
+import com.kb.service.searcher.NaverSearcher;
+import com.kb.service.searcher.Searcher;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 @Component
 public class SearchServiceFactory {
@@ -27,4 +27,7 @@ public class SearchServiceFactory {
         return searchServiceMap.get(searchType);
     }
 
+    public void put(SearchType searchType, Searcher searcher) {
+        this.searchServiceMap.put(searchType, searcher);
+    }
 }
