@@ -5,7 +5,7 @@ import static com.kb.common.exception.ExceptionStrings.INVALID_QUERY;
 import static com.kb.common.exception.ExceptionStrings.INVALID_SIZE;
 import static com.kb.common.exception.ExceptionStrings.INVALID_SORT;
 
-import java.security.InvalidParameterException;
+import com.kb.common.exception.InvalidParameterException;
 import lombok.Builder;
 import lombok.Data;
 
@@ -44,20 +44,22 @@ public final class SearchRequest {
             throw new InvalidParameterException(INVALID_QUERY);
         }
 
-        if (!sort.isEmpty() && !sort.equals(SORT_ACCURACY) && !sort.equals(SORT_RECENCY)) {
+        if (sort != null && !sort.equals(SORT_ACCURACY) && !sort.equals(SORT_RECENCY)) {
             throw new InvalidParameterException(INVALID_SORT);
         }
 
-        if (RANGE_PAGE_MIN > page || page > RANGE_PAGE_MAX) {
+        if (page != null && (RANGE_PAGE_MIN > page || page > RANGE_PAGE_MAX)) {
             throw new InvalidParameterException(INVALID_PAGE);
         }
 
-        if (RANGE_SIZE_MIN > size || size > RANGE_SIZE_MAX) {
+        if (size != null && (RANGE_SIZE_MIN > size || size > RANGE_SIZE_MAX)) {
             throw new InvalidParameterException(INVALID_SIZE);
         }
     }
 
-    public String urlWithKakao(String kakaoUrl) {
+    public String urlWithKakao(String kakaoUrl) throws InvalidParameterException {
+        validate(this.query, this.sort, this.page, this.size);
+
         StringBuilder sb = new StringBuilder(kakaoUrl);
         sb.append("?query=")
             .append(this.query);
@@ -79,4 +81,5 @@ public final class SearchRequest {
 
         return sb.toString();
     }
+
 }

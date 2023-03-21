@@ -15,7 +15,7 @@ class SearchRequestTest {
     @DisplayName("정상 생성")
     @Test
     void validationTest1() {
-        SearchRequest searchRequest = SearchRequest.of(QUERY, "", 1, 1);
+        SearchRequest searchRequest = SearchRequest.of(QUERY, "accuracy", 1, 1);
 
         assertThat(searchRequest.getPage()).isOne();
     }

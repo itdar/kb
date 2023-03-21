@@ -1,9 +1,12 @@
 package com.kb.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
+import com.kb.common.exception.KakaoSearchApiException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +18,20 @@ class KakaoSearchServiceTest {
     private KakaoSearchService searchService;
 
     private final String QUERY_STRING = "블로그";
+
+    @DisplayName("Query 는 필수 값이라서 없으면 예외 발생한다.")
+    @Test
+    void kakaoBlogSearchWithoutQuery() {
+        SearchRequest searchRequest = SearchRequest.builder()
+            .sort("recency")
+            .page(1)
+            .size(10)
+            .build();
+
+        assertThatThrownBy(
+            () -> searchService.search(searchRequest)
+        ).isInstanceOf(KakaoSearchApiException.class);
+    }
 
     @Test
     void kakaoBlogSearchWithAllParamTest() {

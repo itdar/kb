@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.util.StringUtils;
 import redis.embedded.RedisServer;
 
 @Slf4j
@@ -27,7 +26,7 @@ public class EmbeddedRedisConfig {
 
     @PostConstruct
     public void redisServer() throws IOException {
-        int redisPort = isRedisRunning()? findAvailablePort() : this.redisPort;
+        int redisPort = isRedisRunning() ? findAvailablePort() : this.redisPort;
 
         log.info("os.arch: " + System.getProperty("os.arch"));
         log.info("os.name: " + System.getProperty("os.name"));
@@ -107,7 +106,8 @@ public class EmbeddedRedisConfig {
             // 예외와 무관하게 읽힌 내용이 있나없나 확인 중
         }
 
-        return !StringUtils.isEmpty(pidInfo.toString());
+        String pidInfoString = pidInfo.toString();
+        return pidInfoString != null && !pidInfoString.isEmpty();
     }
 
 }

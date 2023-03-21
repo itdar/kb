@@ -1,4 +1,4 @@
-package com.kb.common.domain;
+package com.kb.common.domain.popular;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

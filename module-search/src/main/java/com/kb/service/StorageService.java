@@ -1,12 +1,12 @@
 package com.kb.service;
 
-import com.kb.common.domain.QueryCount;
-import java.util.List;
+import com.kb.common.domain.popular.PopularSize;
+import com.kb.common.domain.popular.QueryCounts;
 
 public interface StorageService {
 
     void saveQuery(String query);
 
-    List<QueryCount> getTop10();
+    QueryCounts getTop(PopularSize popularSize);
 
 }

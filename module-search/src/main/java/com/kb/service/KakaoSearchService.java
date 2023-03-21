@@ -4,6 +4,7 @@ import static com.kb.common.exception.ExceptionStrings.KAKAO_API_EXCEPTION;
 
 import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
+import com.kb.common.exception.InvalidParameterException;
 import com.kb.common.exception.KakaoSearchApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,6 +42,8 @@ public class KakaoSearchService implements SearchService {
             response = restTemplate.exchange(
                 searchRequest.urlWithKakao(kakaoUrl),
                 HttpMethod.GET, httpEntity, SearchResponse.class);
+        } catch (InvalidParameterException e) {
+            throw e;
         } catch (Exception e) {
             throw new KakaoSearchApiException(KAKAO_API_EXCEPTION);
         }

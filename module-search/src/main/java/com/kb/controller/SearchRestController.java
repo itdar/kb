@@ -7,8 +7,8 @@ import com.kb.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -20,13 +20,20 @@ public class SearchRestController {
     private final StorageService storageService;
 
     @GetMapping
-    public ResponseEntity<SearchResponse> search(
-        @RequestParam String query,
-        @RequestParam(defaultValue = "accuracy") String sort,
-        @RequestParam(defaultValue = "1") Integer page,
-        @RequestParam(defaultValue = "10") Integer size) {
-        storageService.saveQuery(query);
-        return ResponseEntity.ok().body(searchService.search(SearchRequest.of(query, sort, page, size)));
+    public ResponseEntity<SearchResponse> search(@RequestBody SearchRequest searchRequest) {
+        storageService.saveQuery(searchRequest.getQuery());
+        return ResponseEntity.ok().body(searchService.search(searchRequest));
     }
+
+//    @GetMapping
+//    public ResponseEntity<SearchResponse> search(
+//        @RequestParam String query,
+//        @RequestParam(defaultValue = "accuracy") String sort,
+//        @RequestParam(defaultValue = "1") Integer page,
+//        @RequestParam(defaultValue = "10") Integer size) {
+//        SearchRequest searchRequest = SearchRequest.of(query, sort, page, size);
+//        storageService.saveQuery(query);
+//        return ResponseEntity.ok().body(searchService.search(searchRequest));
+//    }
 
 }
