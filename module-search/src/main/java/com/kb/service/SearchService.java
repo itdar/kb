@@ -6,7 +6,6 @@ import com.kb.common.enums.SearchType;
 import com.kb.common.exception.AllSearchApiException;
 import com.kb.service.searcher.Searcher;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
