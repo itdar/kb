@@ -1,10 +1,10 @@
-package com.kb.common.dto.search;
+package com.kb.common.dto.search.kakao;
 
 import java.time.LocalDateTime;
 import lombok.Data;
 
 @Data
-public class Documents {
+public class Document {
 
     private String title;
 

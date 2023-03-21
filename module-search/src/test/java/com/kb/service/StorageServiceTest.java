@@ -29,7 +29,7 @@ class StorageServiceTest {
 
     @Test
     @DisplayName("동시 검색 시 카운트 정상 테스트")
-    void lock() throws InterruptedException {
+    void concurrentSaveQueryTest() throws InterruptedException {
         final int count = 300;
 
         // when

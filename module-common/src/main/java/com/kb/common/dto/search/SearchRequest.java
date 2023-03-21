@@ -82,4 +82,34 @@ public final class SearchRequest {
         return sb.toString();
     }
 
+    public String urlWithNaver(String naverUrl) throws InvalidParameterException {
+        validate(this.query, this.sort, this.page, this.size);
+
+        StringBuilder sb = new StringBuilder(naverUrl);
+        sb.append("?query=")
+            .append(this.query);
+
+        if (this.sort != null) {
+            if (this.sort.equals(SORT_ACCURACY)) {
+                sb.append("&sort=")
+                    .append("sim");
+            } else if (this.sort.equals(SORT_RECENCY)) {
+                sb.append("&sort=")
+                    .append("date");
+            }
+        }
+
+        if (this.page != null) {
+            sb.append("&start=")
+                .append(this.page);
+        }
+
+        if (this.size != null) {
+            sb.append("&display=")
+                .append(this.size);
+        }
+
+        return sb.toString();
+    }
+
 }

@@ -1,11 +1,13 @@
 package com.kb.service;
 
-import static com.kb.common.exception.ExceptionStrings.KAKAO_API_EXCEPTION;
+import static com.kb.common.exception.ExceptionStrings.NAVER_API_EXCEPTION;
 
 import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
+import com.kb.common.dto.search.naver.NaverSearchResponse;
 import com.kb.common.exception.InvalidParameterException;
-import com.kb.common.exception.KakaoSearchApiException;
+import com.kb.common.exception.NaverSearchApiException;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -14,18 +16,21 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @RequiredArgsConstructor
-@Service
-public class KakaoSearchService implements SearchService {
+@Component
+public class NaverSearcher implements Searcher {
 
-    @Value("${kakao.url}")
-    private String kakaoUrl;
+    @Value("${naver.url}")
+    private String naverUrl;
 
-    @Value("${kakao.ak}")
-    private String kakaoAk;
+    @Value("${naver.clientId}")
+    private String naverClientId;
+
+    @Value("${naver.clientSecret}")
+    private String naverClientSecret;
 
     private final RestTemplate restTemplate;
 
@@ -33,26 +38,27 @@ public class KakaoSearchService implements SearchService {
     public SearchResponse search(SearchRequest searchRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("Authorization", kakaoAk);
+        headers.set("X-Naver-Client-Id", naverClientId);
+        headers.set("X-Naver-Client-Secret", naverClientSecret);
 
         HttpEntity<?> httpEntity = new HttpEntity<>(headers);
 
-        ResponseEntity<SearchResponse> response;
+        ResponseEntity<NaverSearchResponse> response;
         try {
             response = restTemplate.exchange(
-                searchRequest.urlWithKakao(kakaoUrl),
-                HttpMethod.GET, httpEntity, SearchResponse.class);
+                searchRequest.urlWithNaver(naverUrl),
+                HttpMethod.GET, httpEntity, NaverSearchResponse.class);
         } catch (InvalidParameterException e) {
             throw e;
         } catch (Exception e) {
-            throw new KakaoSearchApiException(KAKAO_API_EXCEPTION);
+            throw new NaverSearchApiException(NAVER_API_EXCEPTION);
         }
 
         if (!response.getStatusCode().equals(HttpStatus.OK)) {
-            throw new KakaoSearchApiException(KAKAO_API_EXCEPTION);
+            throw new NaverSearchApiException(NAVER_API_EXCEPTION);
         }
 
-        return response.getBody();
+        return SearchResponse.of(Objects.requireNonNull(response.getBody()));
     }
 
 }

@@ -3,6 +3,7 @@ package com.kb.controller;
 import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
 import com.kb.service.SearchService;
+import com.kb.service.Searcher;
 import com.kb.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
