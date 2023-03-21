@@ -1,8 +1,8 @@
 package com.kb.service;
 
+import com.kb.common.domain.QueryCount;
 import com.kb.common.dto.popular.PopularResponse;
 import com.kb.common.dto.popular.QueryCountResponse;
-import com.kb.domain.QueryCount;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;

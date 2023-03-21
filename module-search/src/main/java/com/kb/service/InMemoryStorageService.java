@@ -1,6 +1,6 @@
 package com.kb.service;
 
-import com.kb.domain.QueryCount;
+import com.kb.common.domain.QueryCount;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

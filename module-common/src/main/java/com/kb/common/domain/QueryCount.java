@@ -1,4 +1,4 @@
-package com.kb.domain;
+package com.kb.common.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
