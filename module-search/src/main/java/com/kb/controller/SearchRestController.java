@@ -25,15 +25,4 @@ public class SearchRestController {
         return ResponseEntity.ok().body(searchService.search(searchRequest));
     }
 
-//    @GetMapping
-//    public ResponseEntity<SearchResponse> search(
-//        @RequestParam String query,
-//        @RequestParam(defaultValue = "accuracy") String sort,
-//        @RequestParam(defaultValue = "1") Integer page,
-//        @RequestParam(defaultValue = "10") Integer size) {
-//        SearchRequest searchRequest = SearchRequest.of(query, sort, page, size);
-//        storageService.saveQuery(query);
-//        return ResponseEntity.ok().body(searchService.search(searchRequest));
-//    }
-
 }

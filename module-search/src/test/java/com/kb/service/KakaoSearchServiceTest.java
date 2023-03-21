@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.kb.common.dto.search.SearchRequest;
 import com.kb.common.dto.search.SearchResponse;
+import com.kb.common.exception.InvalidParameterException;
 import com.kb.common.exception.KakaoSearchApiException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ class KakaoSearchServiceTest {
 
         assertThatThrownBy(
             () -> searchService.search(searchRequest)
-        ).isInstanceOf(KakaoSearchApiException.class);
+        ).isInstanceOf(InvalidParameterException.class);
     }
 
     @Test

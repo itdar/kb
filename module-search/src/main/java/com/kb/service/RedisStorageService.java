@@ -30,4 +30,9 @@ public class RedisStorageService implements StorageService {
             .collect(Collectors.toList()));
     }
 
+    @Override
+    public void clean() {
+        redisTemplate.opsForZSet().removeRange(REDIS_QUERY_COUNT, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
 }
