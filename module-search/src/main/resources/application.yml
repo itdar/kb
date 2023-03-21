@@ -4,6 +4,12 @@ spring:
   redis:
     host: localhost
     port: 6379
+  cache:
+    type: redis
+    redis:
+      cache-null-values: false
+      time-to-live: 300s
+
 
 kakao:
   url: https://dapi.kakao.com/v2/search/blog
@@ -13,41 +19,3 @@ naver:
   url: https://openapi.naver.com/v1/search/blog.json
   clientId: LnQQAcTupOqyCQSfZhRk
   clientSecret: QrfmWxMfRX
-
----
-#spring:
-#  config:
-#    activate:
-#      on-profile: real
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/mydatabase
-#    username: myusername
-#    password: mypassword
-#  jpa:
-#    hibernate:
-#      ddl-auto: none
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-#
-#---
-#spring:
-#  config:
-#    activate:
-#      on-profile: local
-#  datasource:
-#    url: jdbc:h2:mem:testdb
-#    driver-class-name: org.h2.Driver
-#    username: sa
-#    password:
-#  h2:
-#    console:
-#      enabled: true
-#      path: /h2-console
-#  jpa:
-#    hibernate:
-#      ddl-auto: create-drop
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        dialect: org.hibernate.dialect.H2Dialect

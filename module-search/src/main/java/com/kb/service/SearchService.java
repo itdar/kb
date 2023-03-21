@@ -6,6 +6,7 @@ import com.kb.common.enums.SearchType;
 import com.kb.common.exception.AllSearchApiException;
 import com.kb.service.searcher.Searcher;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class SearchService {
 
     private final SearchServiceFactory searchServiceFactory;
 
-    @Cacheable
+    @Cacheable(key = "#searchRequest")
     public SearchResponse search(SearchRequest searchRequest) {
         for (SearchType searchType : SearchType.values()) {
             Searcher searcher = searchServiceFactory.get(searchType);
