@@ -1,5 +1,9 @@
-plugins {
+bootJar {
+    enabled = true
+}
 
+jar {
+    enabled = true
 }
 
 dependencies {
@@ -9,3 +13,13 @@ dependencies {
     implementation 'it.ozimov:embedded-redis:0.7.2'
 }
 
+sourceSets {
+    main {
+        java {
+            srcDirs "src/main/java"
+        }
+        resources {
+            srcDirs "src/main/resources"
+        }
+    }
+}

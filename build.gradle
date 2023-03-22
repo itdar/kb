@@ -45,6 +45,16 @@ subprojects {
     test {
         useJUnitPlatform()
     }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+
+    ext {
+        //어플리케이션 실행시 -Pprofile 변수로 local, alpha, beta, real 등 선택
+        profile = (!project.hasProperty('profile') || !profile) ? 'local' : profile
+    }
+
 }
 
 project(':module-search') {
