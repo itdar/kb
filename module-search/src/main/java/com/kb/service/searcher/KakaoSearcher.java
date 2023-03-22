@@ -47,7 +47,7 @@ public class KakaoSearcher implements Searcher {
         } catch (InvalidParameterException e) {
             throw e;
         } catch (Exception e) {
-            throw new KakaoSearchApiException(KAKAO_API_EXCEPTION);
+            throw new KakaoSearchApiException(KAKAO_API_EXCEPTION, e);
         }
 
         if (!response.getStatusCode().equals(HttpStatus.OK)) {

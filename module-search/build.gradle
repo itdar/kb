@@ -1,5 +1,9 @@
 bootJar {
     enabled = true
+
+//    bootJarMainClassName {
+//        'com.kb.SearchApplication'
+//    }
 }
 
 jar {

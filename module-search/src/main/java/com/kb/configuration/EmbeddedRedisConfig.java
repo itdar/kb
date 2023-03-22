@@ -3,11 +3,14 @@ package com.kb.configuration;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -32,10 +35,11 @@ public class EmbeddedRedisConfig {
         log.info("os.name: " + System.getProperty("os.name"));
         log.info("isArmMac(): " + isArmMac());
 
-        if (isArmMac()) {
-            redisServer = new RedisServer(Objects.requireNonNull(getRedisFileForArcMac()),
-                redisPort);
-        } else if (!isArmMac()) {
+//        if (isArmMac()) {
+//            redisServer = new RedisServer(Objects.requireNonNull(getRedisFileForArcMac()),
+//                redisPort);
+//        } else if (!isArmMac())
+        {
             redisServer = new RedisServer(redisPort);
         }
 
@@ -48,7 +52,21 @@ public class EmbeddedRedisConfig {
     }
 
     private File getRedisFileForArcMac() throws IOException {
-        return new ClassPathResource("binary/redis/redis-server-6.0.10-mac-arm64").getFile();
+        ClassPathResource classPathResource = new ClassPathResource("binary/redis/redis-server-6.0.10-mac-arm64");
+        log.info(classPathResource.getPath());
+        log.info(" >> binary redis exists: " + classPathResource.exists());
+
+//        return classPathResource.getFile();
+
+        File tempFile = File.createTempFile("/tmp/redis", ".txt");
+        InputStream inputStream = classPathResource.getInputStream();
+        try {
+            FileUtils.copyToFile(classPathResource.getInputStream(), tempFile);
+            log.info("AbsolutePath: " + tempFile.getAbsolutePath());
+            return tempFile;
+        } finally {
+            IOUtils.closeQuietly(inputStream);
+        }
     }
 
     @PreDestroy
